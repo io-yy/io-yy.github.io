@@ -5,13 +5,15 @@
 ## 檔案結構
 
 ```
-/
-├── index.html          ← 首頁（書評列表）
-├── about.html          ← 關於頁面
-├── booklist.html       ← 書單（可選）
+根目錄/
+├── index.html
+├── about.html
+├── banner.jpg
+├── taiyang-cover.jpg
+├── README.md
 └── reviews/
-    ├── template.html   ← 新書評範本（複製這個來寫新文章）
-    └── ...             ← 你的書評頁面
+    ├── taiyang.html
+    └── template.html
 ```
 
 ## 部署步驟
