@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>idunno — 書評</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f7f3ed;
+      --bg-warm: #ede4d6;
+      --border: #d9ccba;
+      --border-light: #e8dfd2;
+      --text-dark: #2c2218;
+      --text-mid: #5e4e38;
+      --text-muted: #8a7560;
+      --text-faint: #9a8468;
+      --accent: #b5915a;
+      --accent-dark: #8c6d3f;
+      --spine-1: #7c5c3e;
+      --spine-2: #4a6741;
+      --spine-3: #4a5870;
+      --spine-4: #7a4a52;
+      --spine-5: #5a4e75;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Lora', Georgia, serif;
+      background: var(--bg);
+      color: var(--text-dark);
+      min-height: 100vh;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    /* ── NAV ── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .site-brand {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 20px;
+      font-weight: 600;
+      font-style: italic;
+      color: var(--text-dark);
+      text-decoration: none;
+      letter-spacing: 0.03em;
+    }
+
+    nav { display: flex; gap: 2rem; }
+
+    nav a {
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    nav a:hover { color: var(--text-dark); }
+
+    /* ── HERO ── */
+    .hero {
+      border-bottom: 1px solid var(--border);
+      padding: 3.5rem 2rem 2.5rem;
+      text-align: center;
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(36px, 6vw, 52px);
+      font-weight: 600;
+      color: var(--text-dark);
+      letter-spacing: 0.01em;
+      margin-bottom: 0.6rem;
+    }
+
+    .hero-sub {
+      font-size: 15px;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    .hero-divider {
+      width: 48px;
+      height: 1px;
+      background: var(--accent);
+      margin: 1.25rem auto 0;
+    }
+
+    /* ── LAYOUT ── */
+    .main-wrap {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 2.5rem 2rem 4rem;
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 3.5rem;
+      align-items: start;
+    }
+
+    /* ── SECTION LABEL ── */
+    .section-label {
+      font-size: 10.5px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.6rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ── BOOK CARDS ── */
+    .book-card {
+      display: flex;
+      gap: 1.1rem;
+      padding: 1.4rem 0;
+      border-bottom: 1px solid var(--border-light);
+      text-decoration: none;
+      color: inherit;
+      transition: opacity 0.2s;
+    }
+
+    .book-card:last-child { border-bottom: none; }
+    .book-card:hover { opacity: 0.72; }
+
+    .book-spine {
+      width: 54px;
+      min-width: 54px;
+      height: 78px;
+      border-radius: 2px 3px 3px 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9.5px;
+      color: rgba(255,255,255,0.8);
+      font-style: italic;
+      writing-mode: vertical-rl;
+      letter-spacing: 0.06em;
+      padding: 0.3rem;
+      text-align: center;
+      font-family: 'Lora', serif;
+    }
+
+    .s1 { background: var(--spine-1); }
+    .s2 { background: var(--spine-2); }
+    .s3 { background: var(--spine-3); }
+    .s4 { background: var(--spine-4); }
+    .s5 { background: var(--spine-5); }
+
+    .book-info { flex: 1; min-width: 0; }
+
+    .book-meta {
+      font-size: 11px;
+      color: var(--text-faint);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 0.3rem;
+    }
+
+    .book-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 19px;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 0.2rem;
+      line-height: 1.3;
+    }
+
+    .book-author {
+      font-size: 13px;
+      color: var(--text-muted);
+      font-style: italic;
+      margin-bottom: 0.45rem;
+    }
+
+    .book-excerpt {
+      font-size: 13.5px;
+      color: var(--text-mid);
+      line-height: 1.7;
+    }
+
+    .rating {
+      display: flex;
+      gap: 2px;
+      margin-top: 0.55rem;
+    }
+
+    .star { color: var(--accent); font-size: 12px; }
+    .star-e { color: var(--border); font-size: 12px; }
+
+    /* ── SIDEBAR ── */
+    .sidebar { position: sticky; top: 72px; }
+
+    .about-card {
+      background: var(--bg-warm);
+      border-radius: 4px;
+      padding: 1.1rem;
+      margin-bottom: 2rem;
+    }
+
+    .avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 18px;
+      color: var(--bg);
+      margin-bottom: 0.75rem;
+    }
+
+    .about-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 0.35rem;
+    }
+
+    .about-bio {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      font-style: italic;
+      line-height: 1.65;
+    }
+
+    .tag-group { margin-bottom: 2rem; }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .tag {
+      font-size: 11.5px;
+      padding: 3px 10px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      color: var(--text-muted);
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .tag:hover {
+      background: var(--bg-warm);
+      color: var(--text-dark);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 1.8rem 2rem;
+      font-size: 12px;
+      color: var(--text-faint);
+      letter-spacing: 0.06em;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      .main-wrap {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        padding: 1.5rem 1.2rem 3rem;
+      }
+      .sidebar { position: static; }
+      .hero { padding: 2.5rem 1.2rem 2rem; }
+      .nav-inner { padding: 0 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="nav-inner">
+      <a class="site-brand" href="index.html">idunno</a>
+      <nav>
+        <a href="index.html">首頁</a>
+        <a href="booklist.html">書單</a>
+        <a href="about.html">關於</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <h1 class="hero-title">idunno</h1>
+    <p class="hero-sub">讀一本書，是與另一個靈魂的相遇。</p>
+    <div class="hero-divider"></div>
+  </section>
+
+  <div class="main-wrap">
+    <main>
+      <div class="section-label">最新書評</div>
+
+      <!-- 書評範例 1 -->
+      <a class="book-card" href="reviews/shide.html">
+        <div class="book-spine s1">失憶警探</div>
+        <div class="book-info">
+          <div class="book-meta">推理小說 · 2024年12月</div>
+          <div class="book-title">《失憶警探》</div>
+          <div class="book-author">Pierre Lemaitre 著</div>
+          <div class="book-excerpt">當記憶成為武器，失憶是詛咒還是救贖？Lemaitre 以一貫的懸念編織出這個令人窒息的故事。</div>
+          <div class="rating">
+            <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star-e">★</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- 書評範例 2 -->
+      <a class="book-card" href="reviews/bainian.html">
+        <div class="book-spine s2">百年孤寂</div>
+        <div class="book-info">
+          <div class="book-meta">文學經典 · 2024年10月</div>
+          <div class="book-title">《百年孤寂》</div>
+          <div class="book-author">Gabriel García Márquez 著</div>
+          <div class="book-excerpt">第三次重讀仍舊被震撼。馬康多的興衰像一場夢，醒來才意識到那正是我們的歷史。</div>
+          <div class="rating">
+            <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- 書評範例 3 -->
+      <a class="book-card" href="reviews/zhengranger.html">
+        <div class="book-spine s3">正常人</div>
+        <div class="book-info">
+          <div class="book-meta">當代小說 · 2024年08月</div>
+          <div class="book-title">《正常人》</div>
+          <div class="book-author">Sally Rooney 著</div>
+          <div class="book-excerpt">Rooney 的句子清澈得令人不安——她把愛情最難以啟齒的部分說得這麼清楚，讓人無處可逃。</div>
+          <div class="rating">
+            <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star-e">★</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- 書評範例 4 -->
+      <a class="book-card" href="reviews/liulang.html">
+        <div class="book-spine s4">流浪者之歌</div>
+        <div class="book-info">
+          <div class="book-meta">哲學小說 · 2024年06月</div>
+          <div class="book-title">《流浪者之歌》</div>
+          <div class="book-author">Hermann Hesse 著</div>
+          <div class="book-excerpt">悉達多的旅程也是每個人的旅程。那條河永遠在流，而我們卻總是站在岸邊以為自己在前進。</div>
+          <div class="rating">
+            <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- 書評範例 5 -->
+      <a class="book-card" href="reviews/yixiangren.html">
+        <div class="book-spine s5">異鄉人</div>
+        <div class="book-info">
+          <div class="book-meta">哲學小說 · 2024年04月</div>
+          <div class="book-title">《異鄉人》</div>
+          <div class="book-author">Albert Camus 著</div>
+          <div class="book-excerpt">冷靜得像報告的文字，卻承載著最沉重的荒誕。Meursault 的漠然，是鏡子，照出我們不敢承認的自己。</div>
+          <div class="rating">
+            <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+          </div>
+        </div>
+      </a>
+
+    </main>
+
+    <aside class="sidebar">
+      <div class="about-card">
+        <div class="avatar">i</div>
+        <div class="about-name">idunno</div>
+        <div class="about-bio">讀書為了忘記自己，寫書評為了記住那些書曾經對我做的事。</div>
+      </div>
+
+      <div class="tag-group">
+        <div class="section-label">分類</div>
+        <div class="tag-list">
+          <a class="tag" href="#">小說</a>
+          <a class="tag" href="#">文學經典</a>
+          <a class="tag" href="#">哲學</a>
+          <a class="tag" href="#">推理</a>
+          <a class="tag" href="#">散文</a>
+          <a class="tag" href="#">社科</a>
+          <a class="tag" href="#">旅行文學</a>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <footer>
+    © 2025 idunno &ensp;·&ensp; 以文字為燈，照亮曾走過的頁面
+  </footer>
+
+</body>
+</html>
