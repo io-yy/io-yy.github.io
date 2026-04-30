@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>《書名》— idunno</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f7f3ed;
+      --bg-warm: #ede4d6;
+      --border: #d9ccba;
+      --border-light: #e8dfd2;
+      --text-dark: #2c2218;
+      --text-mid: #5e4e38;
+      --text-muted: #8a7560;
+      --text-faint: #9a8468;
+      --accent: #b5915a;
+    }
+
+    body {
+      font-family: 'Lora', Georgia, serif;
+      background: var(--bg);
+      color: var(--text-dark);
+      min-height: 100vh;
+      font-size: 16px;
+      line-height: 1.8;
+    }
+
+    /* ── NAV ── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .site-brand {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 20px;
+      font-weight: 600;
+      font-style: italic;
+      color: var(--text-dark);
+      text-decoration: none;
+    }
+
+    nav { display: flex; gap: 2rem; }
+    nav a {
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    nav a:hover { color: var(--text-dark); }
+
+    /* ── ARTICLE ── */
+    .article-wrap {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 3rem 2rem 5rem;
+    }
+
+    .back-link {
+      display: inline-block;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      text-decoration: none;
+      margin-bottom: 2.5rem;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--text-dark); }
+    .back-link::before { content: "← "; }
+
+    .book-header {
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 2rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .review-meta {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      margin-bottom: 0.8rem;
+    }
+
+    .review-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(28px, 5vw, 38px);
+      font-weight: 600;
+      color: var(--text-dark);
+      line-height: 1.25;
+      margin-bottom: 0.5rem;
+    }
+
+    .review-author {
+      font-size: 15px;
+      font-style: italic;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .rating {
+      display: flex;
+      gap: 3px;
+      margin-bottom: 1rem;
+    }
+    .star { color: var(--accent); font-size: 14px; }
+    .star-e { color: var(--border); font-size: 14px; }
+
+    .book-info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.5rem 1rem;
+      font-size: 13px;
+      background: var(--bg-warm);
+      border-radius: 4px;
+      padding: 1rem 1.1rem;
+    }
+
+    .info-item {}
+    .info-label {
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      display: block;
+      margin-bottom: 2px;
+    }
+    .info-val {
+      color: var(--text-mid);
+      font-size: 13px;
+    }
+
+    /* ── BODY CONTENT ── */
+    .review-body { color: var(--text-mid); }
+
+    .review-body p {
+      margin-bottom: 1.5rem;
+      font-size: 16px;
+      line-height: 1.9;
+    }
+
+    .review-body h2 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin: 2.5rem 0 1rem;
+    }
+
+    .review-body blockquote {
+      border-left: 2px solid var(--accent);
+      padding: 0.5rem 0 0.5rem 1.5rem;
+      margin: 2rem 0;
+      font-style: italic;
+      color: var(--text-muted);
+      font-size: 15.5px;
+      line-height: 1.8;
+    }
+
+    .review-body blockquote cite {
+      display: block;
+      font-style: normal;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      color: var(--text-faint);
+      margin-top: 0.6rem;
+    }
+
+    .divider {
+      width: 48px;
+      height: 1px;
+      background: var(--accent);
+      margin: 3rem 0;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 1.8rem 2rem;
+      font-size: 12px;
+      color: var(--text-faint);
+      letter-spacing: 0.06em;
+    }
+
+    @media (max-width: 600px) {
+      .article-wrap { padding: 2rem 1.2rem 4rem; }
+      .book-info-grid { grid-template-columns: 1fr 1fr; }
+      .nav-inner { padding: 0 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="nav-inner">
+      <a class="site-brand" href="../index.html">idunno</a>
+      <nav>
+        <a href="../index.html">首頁</a>
+        <a href="../booklist.html">書單</a>
+        <a href="../about.html">關於</a>
+      </nav>
+    </div>
+  </header>
+
+  <article class="article-wrap">
+    <a class="back-link" href="../index.html">回首頁</a>
+
+    <div class="book-header">
+      <!-- ★ 修改這裡：分類 & 日期 -->
+      <div class="review-meta">推理小說 · 2024年12月</div>
+
+      <!-- ★ 修改這裡：書名 -->
+      <h1 class="review-title">《失憶警探》</h1>
+
+      <!-- ★ 修改這裡：作者 -->
+      <div class="review-author">Pierre Lemaitre 著 · 譯者：謝珮琪</div>
+
+      <!-- ★ 修改這裡：幾顆星就保留幾個 star，其餘換成 star-e -->
+      <div class="rating">
+        <span class="star">★</span>
+        <span class="star">★</span>
+        <span class="star">★</span>
+        <span class="star">★</span>
+        <span class="star-e">★</span>
+      </div>
+
+      <!-- ★ 修改這裡：書籍基本資訊 -->
+      <div class="book-info-grid">
+        <div class="info-item">
+          <span class="info-label">出版年</span>
+          <span class="info-val">2012</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">出版社</span>
+          <span class="info-val">馬可孛羅</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">頁數</span>
+          <span class="info-val">336 頁</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ★ 書評內文：在 <p> 標籤裡寫你的書評，引用句用 <blockquote> -->
+    <div class="review-body">
+
+      <p>
+        當記憶成為武器，失憶是詛咒還是救贖？Lemaitre 以一貫的懸念架構出這個令人窒息的故事。主角 Camille Verhœven 在這部作品裡幾乎被推向了極限——不只是犯罪現場的殘酷，更是他自身的脆弱。
+      </p>
+
+      <h2>敘事結構</h2>
+
+      <p>
+        全書最令我印象深刻的，是 Lemaitre 處理時間感的方式。回憶與現在交錯，讀者始終被置於一種輕微的迷失之中，像是主角本身的狀態折射到了閱讀體驗上。
+      </p>
+
+      <blockquote>
+        「每個人心裡都住著一個陌生人，只是大多數人終其一生都沒有機會遇見他。」
+        <cite>— 《失憶警探》</cite>
+      </blockquote>
+
+      <p>
+        這句話放在書的中段，卻是讀完整部作品之後才真正被擊中。Lemaitre 的文字不靠煽情，靠的是精確——每一句都恰到好處，不多一字。
+      </p>
+
+      <div class="divider"></div>
+
+      <h2>總評</h2>
+
+      <p>
+        如果你讀過《告別》或《我們生命中的每一個清晨》，這本會給你不同的驚喜。推薦在一個安靜的週末下午開始，因為一旦翻開，就很難放下。
+      </p>
+
+    </div>
+  </article>
+
+  <footer>
+    © 2025 idunno &ensp;·&ensp; 以文字為燈，照亮曾走過的頁面
+  </footer>
+
+</body>
+</html>
