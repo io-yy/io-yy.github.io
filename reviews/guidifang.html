@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>《鬼地方》— idunno</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f7f3ed;
+      --bg-warm: #ede4d6;
+      --border: #d9ccba;
+      --text-dark: #2c2218;
+      --text-mid: #5e4e38;
+      --text-muted: #8a7560;
+      --text-faint: #9a8468;
+      --accent: #b5915a;
+    }
+
+    body {
+      font-family: 'Noto Sans TC', sans-serif;
+      background: var(--bg);
+      color: var(--text-dark);
+      min-height: 100vh;
+      font-size: 22px;
+      line-height: 1.8;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .site-brand {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 20px;
+      font-weight: 600;
+      font-style: italic;
+      color: var(--text-dark);
+      text-decoration: none;
+    }
+
+    nav { display: flex; gap: 2rem; }
+    nav a {
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    nav a:hover { color: var(--text-dark); }
+
+    .article-wrap {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 3rem 2rem 5rem;
+    }
+
+    .back-link {
+      display: inline-block;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      text-decoration: none;
+      margin-bottom: 2.5rem;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--text-dark); }
+    .back-link::before { content: "← "; }
+
+    .book-header {
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 2rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .book-header-top {
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+      margin-bottom: 1.2rem;
+    }
+
+    .book-cover {
+      width: 100px;
+      min-width: 100px;
+      border-radius: 3px;
+      box-shadow: 2px 4px 16px rgba(44,34,24,0.18);
+    }
+
+    .book-header-info { flex: 1; }
+
+    .review-meta {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      margin-bottom: 0.6rem;
+    }
+
+    .review-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(24px, 4vw, 34px);
+      font-weight: 600;
+      color: var(--text-dark);
+      line-height: 1.25;
+      margin-bottom: 0.4rem;
+    }
+
+    .review-author {
+      font-size: 14px;
+      font-style: italic;
+      color: var(--text-muted);
+      margin-bottom: 0.8rem;
+    }
+
+    .rating { display: flex; gap: 3px; }
+    .star { color: var(--accent); font-size: 14px; }
+    .star-e { color: var(--border); font-size: 14px; }
+
+    .book-info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.5rem 1rem;
+      background: var(--bg-warm);
+      border-radius: 4px;
+      padding: 1rem 1.1rem;
+    }
+
+    .info-label {
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      display: block;
+      margin-bottom: 2px;
+    }
+    .info-val { color: var(--text-mid); font-size: 13px; }
+
+    .review-body { color: var(--text-mid); }
+
+    .review-body p {
+      margin-bottom: 1.6rem;
+      font-size: 18px;
+      line-height: 2;
+    }
+
+    .review-body h2 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin: 2.5rem 0 1rem;
+    }
+
+    .review-body blockquote {
+      border-left: 2px solid var(--accent);
+      padding: 0.5rem 0 0.5rem 1.5rem;
+      margin: 2rem 0;
+      font-style: italic;
+      color: var(--text-muted);
+      font-size: 16px;
+      line-height: 1.85;
+    }
+
+    .divider {
+      width: 48px;
+      height: 1px;
+      background: var(--accent);
+      margin: 2.5rem 0;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 1.8rem 2rem;
+      font-size: 12px;
+      color: var(--text-faint);
+      letter-spacing: 0.06em;
+    }
+
+    @media (max-width: 600px) {
+      .article-wrap { padding: 2rem 1.2rem 4rem; }
+      .book-info-grid { grid-template-columns: 1fr 1fr; }
+      .nav-inner { padding: 0 1.2rem; }
+      .book-cover { width: 80px; min-width: 80px; }
+      nav { gap: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="nav-inner">
+      <a class="site-brand" href="../index.html">idunno</a>
+      <nav>
+        <a href="../index.html">首頁</a>
+        <a href="../about.html">關於</a>
+      </nav>
+    </div>
+  </header>
+
+  <article class="article-wrap">
+    <a class="back-link" href="../index.html">回首頁</a>
+
+    <div class="book-header">
+      <div class="book-header-top">
+        <!-- 書封：把封面圖片改名 guidifang-cover.jpg 上傳到根目錄 -->
+        <img class="book-cover" src="../guidifang-cover.jpg" alt="鬼地方書封" />
+        <div class="book-header-info">
+          <div class="review-meta">台灣文學 · 2025年</div>
+          <h1 class="review-title">《鬼地方》</h1>
+          <div class="review-author">陳思宏 著</div>
+          <div class="rating">
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="book-info-grid">
+        <div>
+          <span class="info-label">作者</span>
+          <span class="info-val">陳思宏</span>
+        </div>
+        <div>
+          <span class="info-label">出版社</span>
+          <span class="info-val">鏡文學</span>
+        </div>
+        <div>
+          <span class="info-label">類型</span>
+          <span class="info-val">台灣文學</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="review-body">
+
+      <blockquote>
+        回不去的那個故鄉，我們叫他鬼地方。
+      </blockquote>
+
+      <p>
+        死寂的人間長出鮮活的故事。一個同時存在於真實與虛構的所在，它關於家鄉、關於出走、關於家庭、也關於個人成就。
+      </p>
+
+      <p>
+        在這麼一個傳統的家庭裡，每個人的身分大於他們自己，於是身分和自我大吵一架，身分隨家庭支離破碎，自我也成為碎片，變成了兩敗俱傷的鬼地方。
+      </p>
+
+      <div class="divider"></div>
+
+      <p>
+        重男輕女的家庭裡，媳婦角色所承受的壓力會在角色轉變成婆婆之後再一次複製。長女、姐姐、想出類拔萃的三女、爭寵的四女五妹、被寄予厚望的長子——還有么子，男生，不那麼像男生的男生，作家，同性戀，最會念書的孩子，殺人犯。
+      </p>
+
+      <p>
+        鬼地方裡沒有一件好事，但它是家鄉，成長的記憶裡它舉足輕重。
+      </p>
+
+      <div class="divider"></div>
+
+      <p>
+        怕鬼嗎？鬼明明不存在——它卻一直都在。當鬼在家鄉裡，它更像說不出口的壓抑和沉悶，於是地方成為鬼地方，回不去的那個故鄉，我們叫他鬼地方。
+      </p>
+
+    </div>
+  </article>
+
+  <footer>
+    © 2025 idunno &ensp;·&ensp; Petit à petit, Soyez Tranquille
+  </footer>
+
+</body>
+</html>
